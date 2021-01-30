@@ -1,0 +1,45 @@
+{
+  "name": "mexx/element-api-cache-buster",
+  "description": "Delete cache of element api if necessary .",
+  "type": "craft-plugin",
+  "version": "0.0.1",
+  "keywords": [
+    "craft",
+    "cms",
+    "craftcms",
+    "craft-plugin",
+    "elementapicachebuster"
+  ],
+  "support": {
+    "docs": "https://github.com/swissmexxa/craft-element-api-cache-buster",
+    "issues": "https://github.com/swissmexxa/craft-element-api-cache-buster"
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Martin Lüpold",
+      "homepage": "https://github.com/swissmexxa/craft-element-api-cache-buster"
+    }
+  ],
+  "require": {
+    "php": ">=7.4",
+    "craftcms/cms": "^3.0.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "mexx\\elementapicachebuster\\": "src/"
+    }
+  },
+  "extra": {
+    "name": "ElementApiCacheBuster",
+    "handle": "element-api-cache-buster",
+    "developer": "Martin Lüpold",
+    "developerUrl": "https://github.com/swissmexxa/craft-element-api-cache-buster",
+    "documentationUrl": "https://github.com/swissmexxa/craft-element-api-cache-buster",
+    "changelogUrl": "https://github.com/swissmexxa/craft-element-api-cache-buster",
+    "components": {
+      "elementApiCacheBusterService": "mexx\\elementapicachebuster\\services\\ElementApiCacheBusterService"
+    },
+    "class": "mexx\\elementapicachebuster\\ElementApiCacheBuster"
+  }
+}
