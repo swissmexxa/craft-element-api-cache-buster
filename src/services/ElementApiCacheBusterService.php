@@ -53,7 +53,7 @@ class ElementApiCacheBusterService extends Component
      *
      * @return mixed
      */
-    public function bustEntryCache($slug, $siteId, $type)
+    public function bustEntryCache($slug, $siteId, $type, $token)
     {
         if (!$this->safetyChecks($type, false)) {
             return;
@@ -63,6 +63,7 @@ class ElementApiCacheBusterService extends Component
         // => elementapi:siteid:url:
         $cacheKey = $this->getCacheKey($siteId, $this->dependencies['' . $type]['url']  . $slug);
         Craft::$app->getCache()->delete($cacheKey);
+        Craft::$app->getCache()->delete($cacheKey . 'token=' . $token);
     }
 
     public function bustListsCache($siteId, $type)

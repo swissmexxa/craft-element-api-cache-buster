@@ -14,10 +14,12 @@ use mexx\elementapicachebuster\services\ElementApiCacheBusterService as ElementA
 
 use Craft;
 use craft\base\Plugin;
+use craft\base\Element;
 use craft\services\Plugins;
 use craft\events\PluginEvent;
 use craft\services\Elements;
 use craft\events\RegisterComponentTypesEvent;
+use craft\helpers\ElementHelper;
 
 use yii\base\Event;
 
@@ -151,10 +153,22 @@ class ElementApiCacheBuster extends Plugin
             return;
         }
 
-        Craft::warning('Hiiier' . $element->type);
+        $token = null;
+        if (ElementHelper::isDraftOrRevision($event->element)) {
+            $tokenQuery = (new \craft\db\Query())
+                ->select('token')
+                ->from('tokens')
+                ->orderBy('id desc')
+                ->limit(1)
+                ->all();
+    
+            if (count($tokenQuery) > 0) {
+                $token = $tokenQuery[0]['token'];
+            }
+        }
 
 
-        ElementApiCacheBuster::$plugin->elementApiCacheBusterService->bustEntryCache($element->slug, $element->siteId, $element->type);
+        ElementApiCacheBuster::$plugin->elementApiCacheBusterService->bustEntryCache($element->slug, $element->siteId, $element->type, $token);
         ElementApiCacheBuster::$plugin->elementApiCacheBusterService->bustListsCache($element->siteId, $element->type);
     }
 }
